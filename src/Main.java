@@ -1,83 +1,96 @@
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
-import java.util.logging.StreamHandler;
 
 public class Main {
     private static final Logger logger = Logger.getLogger(Main.class.getName());
 
     public static void main(String[] args) {
-        Handler streamHandler = new StreamHandler();
-        streamHandler.setFormatter(new MyFormatter());
-        logger.addHandler(streamHandler);
+        try {
+            Handler fileHandler = new FileHandler("logfile.txt");
+            fileHandler.setFormatter(new MyFormatter());
+            logger.addHandler(fileHandler);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         logger.setUseParentHandlers(false);
-        File dir1 = new File("D://Games/src");
-        File dir2 = new File("D://Games/res");
-        File dir3 = new File("D://Games/savegames");
-        File dir4 = new File("D://Games/temp");
+        File dir0 = new File("Games");
+        File dir1 = new File("Games/src");
+        File dir2 = new File("Games/res");
+        File dir3 = new File("Games/savegames");
+        File dir4 = new File("Games/temp");
+        if (dir0.mkdir()) {
+            logger.info("РљР°С‚Р°Р»РѕРі /Games СЃРѕР·РґР°РЅ");
+        }
         if (dir1.mkdir()) {
-            logger.info("Каталог /src создан");
-        } else logger.info("Каталог /src НЕ создан");
+            logger.info("РљР°С‚Р°Р»РѕРі /src СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /src РќР• СЃРѕР·РґР°РЅ");
         if (dir2.mkdir()) {
-            logger.info("Каталог /res создан");
-        } else logger.info("Каталог /res НЕ создан");
+            logger.info("РљР°С‚Р°Р»РѕРі /res СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /res РќР• СЃРѕР·РґР°РЅ");
         if (dir3.mkdir()) {
-            logger.info("Каталог /savegames создан");
-        } else logger.info("Каталог /savegames НЕ создан");
+            logger.info("РљР°С‚Р°Р»РѕРі /savegames СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /savegames РќР• СЃРѕР·РґР°РЅ");
         if (dir4.mkdir()) {
-            logger.info("Каталог /temp создан");
-        } else logger.info("Каталог /temp НЕ создан");
-        File dir5 = new File("D://Games/src/main");
-        File dir6 = new File("D://Games/src/test");
+            logger.info("РљР°С‚Р°Р»РѕРі /temp СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /temp РќР• СЃРѕР·РґР°РЅ");
+        File dir5 = new File("Games/src/main");
+        File dir6 = new File("Games/src/test");
         if (dir5.mkdir()) {
-            logger.info("Каталог /main в каталоге /scr создан");
-        } else logger.info("Каталог /main в каталоге /scr НЕ создан");
+            logger.info("РљР°С‚Р°Р»РѕРі /main РІ РєР°С‚Р°Р»РѕРіРµ Games/scr СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /main РІ РєР°С‚Р°Р»РѕРіРµ Games/scr РќР• СЃРѕР·РґР°РЅ");
         if (dir6.mkdir()) {
-            logger.info("Каталог /test в каталоге /scr создан");
-        } else logger.info("Каталог /test в каталоге /scr НЕ создан");
-        File file1 = new File("D://Games/src/main", "Main.java");
-        File file2 = new File("D://Games/src/main", "Utils.java");
+            logger.info("РљР°С‚Р°Р»РѕРі /test РІ РєР°С‚Р°Р»РѕРіРµ Games/scr СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /test РІ РєР°С‚Р°Р»РѕРіРµ Games/scr РќР• СЃРѕР·РґР°РЅ");
+        File file1 = new File("Games/src/main/Main.java");
+        File file2 = new File("Games/src/main/Utils.java");
         try {
             if (file1.createNewFile()) {
-                logger.info("Файл Main.java в каталоге /main создан");
+                logger.info("Р¤Р°Р№Р» Main.java РІ РєР°С‚Р°Р»РѕРіРµ /main СЃРѕР·РґР°РЅ");
             }
         } catch (IOException exc) {
-            logger.info("Файл Main.java в каталоге /main НЕ создан");
+            logger.info("Р¤Р°Р№Р» Main.java РІ РєР°С‚Р°Р»РѕРіРµ /main РќР• СЃРѕР·РґР°РЅ");
         }
         try {
             if (file2.createNewFile()) {
-                logger.info("Файл Utils.java в каталоге /main создан");
+                logger.info("Р¤Р°Р№Р» Utils.java РІ РєР°С‚Р°Р»РѕРіРµ /main СЃРѕР·РґР°РЅ");
             }
         } catch (IOException exc) {
-            logger.info("Файл Utils.java в каталоге /main НЕ создан");
+            logger.info("Р¤Р°Р№Р» Utils.java РІ РєР°С‚Р°Р»РѕРіРµ /main РќР• СЃРѕР·РґР°РЅ");
         }
-        File dir7 = new File("D://Games/res/drawables");
-        File dir8 = new File("D://Games/res/vectors");
-        File dir9 = new File("D://Games/res/icons");
+        File dir7 = new File("Games/res/drawables");
+        File dir8 = new File("Games/res/vectors");
+        File dir9 = new File("Games/res/icons");
         if (dir7.mkdir()) {
-            logger.info("Каталог /drawables в каталоге /res создан");
-        } else logger.info("Каталог /drawables в каталоге /res НЕ создан");
+            logger.info("РљР°С‚Р°Р»РѕРі /drawables РІ РєР°С‚Р°Р»РѕРіРµ Games/res СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /drawables РІ РєР°С‚Р°Р»РѕРіРµ Games/res РќР• СЃРѕР·РґР°РЅ");
         if (dir8.mkdir()) {
-            logger.info("Каталог /vectors в каталоге /res создан");
-        } else logger.info("Каталог /vectors в каталоге /res НЕ создан");
+            logger.info("РљР°С‚Р°Р»РѕРі /vectors РІ РєР°С‚Р°Р»РѕРіРµ Games/res СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /vectors РІ РєР°С‚Р°Р»РѕРіРµ Games/res РќР• СЃРѕР·РґР°РЅ");
         if (dir9.mkdir()) {
-            logger.info("Каталог /icons в каталоге /res создан");
-        } else logger.info("Каталог /icons в каталоге /res НЕ создан");
-        File file3 = new File("D://Games/temp", "temp.txt");
+            logger.info("РљР°С‚Р°Р»РѕРі Games/icons РІ РєР°С‚Р°Р»РѕРіРµ /res СЃРѕР·РґР°РЅ");
+        } else logger.info("РљР°С‚Р°Р»РѕРі /icons РІ РєР°С‚Р°Р»РѕРіРµ Games/res РќР• СЃРѕР·РґР°РЅ");
+        File file3 = new File("Games/temp/temp.txt");
         try {
             if (file3.createNewFile()) {
-                logger.info("Файл temp.txt в каталоге /temp создан");
+                logger.info("Р¤Р°Р№Р» temp.txt РІ РєР°С‚Р°Р»РѕРіРµ Games/temp СЃРѕР·РґР°РЅ");
             }
         } catch (IOException ex) {
-            logger.info("Файл temp.txt в каталоге /temp НЕ создан");
+            logger.info("Р¤Р°Р№Р» temp.txt РІ РєР°С‚Р°Р»РѕРіРµ Games/temp РќР• СЃРѕР·РґР°РЅ");
         }
-        try (FileWriter writer = new FileWriter("D://Games/temp/temp.txt")) {
-//            writer.write();
-            logger.info("Лог программы записан в файл temp.txt");
+        try (FileReader reader = new FileReader("logfile.txt");
+             FileWriter writer = new FileWriter("Games/temp/temp.txt")) {
+            int i;
+            while ((i = reader.read()) != -1){
+                writer.write(i);
+            }
+            logger.info("Р›РѕРі РїСЂРѕРіСЂР°РјРјС‹ РїРµСЂРµР·Р°РїРёСЃР°РЅ РІ С„Р°Р№Р» temp.txt");
         } catch (IOException ex) {
-            logger.info("Не удалось записать лог программы в файл temp.txt");
+            logger.info("РќРµ СѓРґР°Р»РѕСЃСЊ РїРµСЂРµР·Р°РїРёСЃР°С‚СЊ Р»РѕРі РїСЂРѕРіСЂР°РјРјС‹ РІ С„Р°Р№Р» temp.txt");
         }
     }
 }
